@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="js/bdDados.js">
+
+    <link rel="shortcut icon" href="img/logo-icon.png" type="image/x-icon">
+
+    <title>Login - Athena Shop</title>
+
+</head>
+
+<body>
+
+   
+    <header>
+        <picture>
+
+            <source media="(max-width: 390px)" srcset="img/logo-icon.png">
+            <source media="(max-width: 479px)" srcset="img/logo-icon.png">
+            <img src="img/logo-letreiro.png" alt="logo-athena" class="logo">
+
+        </picture>
+    </header>
+
+    <main>
+
+    <form action="/login" method="post">
+        <h1 class="txt">Login</h1>
+        <input type="text" name="email" id="email" placeholder="Nome de usuáio ou e-mail"/>
+        <input type="password" name="senha" id="senha" placeholder="senha" />
+        <div class="buttons">
+                <div class="button-logar">
+                    <button onclick="window.location='/cadastro' " type="button" id="button-login">Cadastrar</button>
+                </div>
+
+                <div class="button-home">
+                    <button type="submit" id="button-home">Logar</button>
+                </div>
+            </div>
+    </form>
+
+        
+    </main>
+</body>
+
+</html>

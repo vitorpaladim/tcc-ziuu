@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configura a sessão
 app.use(session({
-    secret: 'ziuu',
+    secret: 'ziuutcc',
     resave: true,
     saveUninitialized: true
   }));

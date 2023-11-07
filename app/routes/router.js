@@ -86,8 +86,8 @@ function myMiddleware(req, res, next) {
 
   
 
-router.get("/cadastro", function(req, res){
-    res.render("pages/cadastro", {retorno: null, erros: null})}
+router.get("/registro", function(req, res){
+    res.render("pages/registro", {retorno: null, erros: null})}
 );
 
 

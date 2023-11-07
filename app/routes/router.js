@@ -250,7 +250,7 @@ router.post("/cadastrar",
 
 
 router.post(
-  "/login",
+  "/logar",
   // body("email")
   //   .isLength({ min: 4, max: 45 })
   //   .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),

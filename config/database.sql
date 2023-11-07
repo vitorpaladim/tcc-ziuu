@@ -10,3 +10,11 @@ CREATE TABLE usuarios (
   senha longtext NOT NULL,
   id_tipo_usuario int not null default '1'
 );
+
+CREATE TABLE divulgacao (
+  id_divulgacao varchar(200) primary key,
+  img_divulgacao varchar (255),
+  usuario_divulgacao varchar(60) NOT NULL,
+  titulo_divulgacao varchar(255) NOT NULL  
+);
+

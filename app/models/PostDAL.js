@@ -1,12 +1,12 @@
-module.exports = class ProdutosDAL {
+module.exports = class PostDAL {
 
-    constructor(athenashop){
-        this.athenashop = athenashop;
+    constructor(conexao){
+        this.conexao = conexao;
     }
     
     FindAll(){
         return new Promise(function(resolve, reject){
-            this.athenashop.query('SELECT * FROM noticia ',  function(error, elements){
+            this.conexao.query('SELECT * FROM divulgacao ',  function(error, elements){
                 if(error){
                     return reject(error);
                 }
@@ -31,7 +31,7 @@ module.exports = class ProdutosDAL {
 
     findID(id) {
         return new Promise((resolve, reject) => {
-            this.athenashop.query('SELECT * FROM noticia WHERE  id_noticia = ?', [id], function (error, elements) {
+            this.conexao.query('SELECT * FROM divulgacao WHERE  id_noticia = ?', [id], function (error, elements) {
                     if (error) {
                         return reject(error);
                     }
@@ -43,7 +43,7 @@ module.exports = class ProdutosDAL {
 
     FindPage(pagina, total){
         return new Promise((resolve, reject)=>{
-            this.athenashop.query('SELECT * FROM noticia limit '+ pagina + ', '+ total,  function(error, elements){
+            this.conexao.query('SELECT * FROM divulgacao limit '+ pagina + ', '+ total,  function(error, elements){
                 if(error){
                     return reject(error);
                 }
@@ -54,7 +54,7 @@ module.exports = class ProdutosDAL {
 
     TotalReg(){
         return new Promise((resolve, reject)=>{
-            this.athenashop.query('SELECT count(*) total FROM noticia ',  function(error, elements){
+            this.conexao.query('SELECT count(*) total FROM divulgacao ',  function(error, elements){
                 if(error){
                     return reject(error);
                 }
@@ -65,7 +65,7 @@ module.exports = class ProdutosDAL {
 
     create(camposJson) {
         return new Promise((resolve, reject) => {
-            this.athenashop.query("insert into noticia set ?",
+            this.conexao.query("insert into divulgacao set ?",
                 camposJson,
                 function (error, elements) {
                     if (error) {
@@ -77,7 +77,7 @@ module.exports = class ProdutosDAL {
     }
     update(camposJson, id) {
         return new Promise((resolve, reject) => {
-            this.athenashop.query("UPDATE noticia SET ? WHERE id = ?",
+            this.conexao.query("UPDATE divulgacao SET ? WHERE id = ?",
             [camposJson, id],
             function (error, results, fields) {
                 if (error) {

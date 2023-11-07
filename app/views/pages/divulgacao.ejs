@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divulgação - Ziuu</title>
+</head>
+<body>
+    <section>
+        <form action="/postar" method="post" enctype="multipart/form-data">
+            <div>
+                <img src="" alt="">
+                <input type="text" value="" name="usuario_divulgacao" autocomplete="off">
+            </div>
+            <div>
+                <input type="text" value="" name="titulo_divulgacao" id="" autocomplete="off">
+            </div>
+            <div>
+                <input type="file" name="img_divulgacao" autocomplete="off">
+                <button>Postar</button>
+            </div>
+        </form>
+        
+    </section>
+    <section>
+        <% post.forEach(function(divulgacao){ %>
+        <div>
+            <div>   
+                <img src="<%= divulgacao.img_divulgacao%>" alt="">
+            </div>
+            <div>
+                <img src="" alt="">
+            </div>
+            <div>
+                <img src="" alt="">
+                <h4><%=divulgacao.usuario_divulgacao%></h4>
+                <span><%= divulgacao.titulo_divulgacao%></span>
+            </div>
+        </div>
+        <% }); %>
+    </section>
+</body>
+</html>

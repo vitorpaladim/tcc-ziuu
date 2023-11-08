@@ -75,9 +75,9 @@ function myMiddleware(req, res, next) {
     res.render("pages/home", req.session.autenticado);
   });
 
-  router.get("/usuario", verificarUsuAutenticado, verificarUsuAutorizado([1, 2, 3], "pages/login"),function (req, res) {
+  router.get("/usuario", verificarUsuAutenticado, function (req, res) {
     if (req.session.autenticado.autenticado == null) {
-      res.render("pages/login")
+      res.redirect("/login")
   } else {
       res.render("pages/perfil",{autenticado: req.session.autenticado, retorno: null, erros: null})}
   
@@ -86,13 +86,13 @@ function myMiddleware(req, res, next) {
 
   
 
-router.get("/registro", function(req, res){
-    res.render("pages/registro", {retorno: null, erros: null})}
+router.get("/cadastro", function(req, res){
+    res.render("pages/cadastro", { listaErros: null, dadosNotificacao: null, valores: req.body})}
 );
 
 
 router.get("/login", function(req, res){
-    res.render("pages/login", {retorno: null, erros: null})}
+    res.render("pages/login", { listaErros: null, dadosNotificacao: null, valores: req.body})}
 );
 
 router.get("/perfil", function(req, res){
@@ -211,114 +211,113 @@ router.get("/excluir/:id", function (req, res) {
 
 
 
-router.post("/cadastrar", 
-    body("email")
-    .isEmail({min:5, max:50})
-    .withMessage("O email deve ser válido"),
-    body("senha")
-    .isStrongPassword()
-    .withMessage("A senha deve ser válida"),
+// router.post("/cadastrar", 
+//     body("email")
+//     .isEmail({min:5, max:50})
+//     .withMessage("O email deve ser válido"),
+//     body("senha")
+//     .isStrongPassword()
+//     .withMessage("A senha deve ser válida"),
 
-    async function(req, res){
+//     async function(req, res){
     
-    const dadosForm = {
-        nome: req.body.nome,
-        email: req.body.email,
-        senha: bcrypt.hashSync(req.body.senha, salt)
-    }
-    if (!dadosForm.email || !dadosForm.senha) {
-        return res.status(400).send('Por favor, preencha todos os campos.');
-    }
-    const id = uuid.v4();
+//     const dadosForm = {
+//         nome: req.body.nome,
+//         email: req.body.email,
+//         senha: bcrypt.hashSync(req.body.senha, salt)
+//     }
+//     if (!dadosForm.email || !dadosForm.senha) {
+//         return res.status(400).send('Por favor, preencha todos os campos.');
+//     }
+//     const id = uuid.v4();
 
-    const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
-    const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
+//     const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
+//     const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
 
-    db.query(query, values, (err, result) => {
-        if (err) {
-          console.error('Erro ao inserir dados no banco de dados:', err);
-        } else {
-          console.log('Dados inseridos com sucesso!');
-        }
-      });
+//     db.query(query, values, (err, result) => {
+//         if (err) {
+//           console.error('Erro ao inserir dados no banco de dados:', err);
+//         } else {
+//           console.log('Dados inseridos com sucesso!');
+//         }
+//       });
 
       
 
-      setTimeout(function () {
-        res.render("pages/login", { email: dadosForm.email });
-      }, 1000); 
+//       setTimeout(function () {
+//         res.render("pages/login", { email: dadosForm.email });
+//       }, 1000); 
 
-      console.log(dadosForm)    
-})
+//       console.log(dadosForm)    
+// })
 
-
-router.post(
-  "/logar",
-  // body("email")
-  //   .isLength({ min: 4, max: 45 })
-  //   .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
-  // body("senha")
-  //   .isStrongPassword()
-  //   .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)"),
-
-  gravarUsuAutenticado(usuarioDAL, bcrypt),
-  
+router.post("/cadastrar",
+  body("nome")
+    .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+  body("email")
+    .isEmail().withMessage("Digite um e-mail válido!"),
+  body("senha")
+    .isStrongPassword()
+    .withMessage("A senha deve ter no mínimo 8 caracteres, 1 letra maiúscula, 1 caractere especial e 1 número"),
   async function (req, res) {
+    var dadosForm = {
+      nome: req.body.nome,
+      email: req.body.email,
+      senha: bcrypt.hashSync(req.body.senha, salt),
+    };
     const erros = validationResult(req);
     if (!erros.isEmpty()) {
-      
-      return res.render("pages/login", { listaErros: erros, dadosNotificacao: null, autenticado: null })
-      
+      return res.render("pages/cadastro", { listaErros: erros, dadosNotificacao: null, valores: req.body })
     }
-    
-    if (req.session.autenticado != null) {
-      //mudar para página de perfil quando existir
-      res.redirect("/");
-    } else {
-      res.render("pages/login", { listaErros: erros, autenticado: req.session.autenticado, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "E-mail e/ou senha inválidos!", tipo: "error" } })
+    try {
+      let insert = await usuarioDAL.create(dadosForm);
+      console.log(insert);
+      res.render("pages/cadastro", {
+        listaErros: null, dadosNotificacao: {
+          titulo: "Cadastro realizado!", mensagem: "Usuário criado com o id " + insert.insertId + "!", tipo: "success"
+        }, valores: req.body
+      })
+    } catch (e) {
+      res.render("pages/cadastro", {
+        listaErros: erros, dadosNotificacao: {
+          titulo: "Erro ao cadastrar!", mensagem: "Verifique os valores digitados!", tipo: "error"
+        }, valores: req.body
+      })
     }
+  });
 
-    console.log(erros)
-});
+
+  router.post(
+    "/logar",
+    body("email")
+      .isLength({ min: 4, max: 45 })
+      .withMessage("O nome de usuário/e-mail esta incorreto!"),
+    body("senha")
+      .isStrongPassword()
+      .withMessage("Verifique novamente a senha digitada!"),
   
+    gravarUsuAutenticado(usuarioDAL, bcrypt),
+    function (req, res) {
+      const erros = validationResult(req);
+      if (!erros.isEmpty()) {
+        return res.render("pages/login", { listaErros: erros, dadosNotificacao: null })
+      }
+      if (req.session.autenticado != null) {
+        //mudar para página de perfil quando existir
+        res.render("pages/login", {
+          listaErros: null, dadosNotificacao: {
+            titulo: "Login realizado!", mensagem: "Usuário logado com sucesso", tipo: "success"
+          }, valores: req.body
+        })
+      } else {
+        res.render("pages/login", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
+      }
+    });
 
-//   router.post(
-//     "/login",
-//     body("email")
-//         .isEmail({min:5, max:50})
-//         .withMessage("O email deve ser válido"),
-//     body("senha")
-//         .isStrongPassword()
-//         .withMessage("A senha deve ser válida"),
 
-
-
-//     // gravarUsuAutenticado(usuarioDAL, bcrypt),
-//     function(req, res){
-
-//         const dadosForm = {
-//             email: req.body.email,
-//             senha: req.body.senha
-//         }
-//         if (!dadosForm.email || !dadosForm.senha) {
-//             return res.status(400).send('Por favor, preencha todos os campos.');
-//         }
-//          const errors = validationResult(req)
-//          if(!errors.isEmpty()){
-//              console.log(errors);    
-//              return res.render("pages/login", {retorno: null, listaErros: errors, valores: req.body});
-//          }
-//         // if(req.session.autenticado != null) {
-//         //    res.redirect("/");
-//         // } else {
-//         //      res.render("pages/login", { listaErros: null, retorno: null, valores: req.body})
-//         //  }
-
-//         setTimeout(function () {
-//              res.render("pages/home", { email: dadosForm.email });
-//            }, 1000); 
-//     });
-
+    router.get("/sair", limparSessao, function (req, res) {
+      res.redirect("/");
+    });
 
 
 module.exports = router;

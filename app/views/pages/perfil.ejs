@@ -62,7 +62,7 @@
 
                     </div>
 
-                    <button class="button_sair">Sair</button>
+                    <a href="/sair"><button class="button_sair">Sair</button></a>
                 </div>
 
                 
@@ -91,13 +91,13 @@
             <div class="cabecalho">
 
             <img src="/img/fotodeperfil.png" alt=""> <!--foto-->
-            <h3>Maria clara</h3> <!--Nome-->
-            <h4 class="usuario">maria</h4><!--usuario-->
+            <h3><%= autenticado.autenticado %></h3> <!--Nome-->
+            <h4 class="usuario"><%=autenticado.usuario%></h4><!--usuario-->
            
            
 
             <div class="segui">
-            <h4 class="numero">1</h4>
+            <h4 class="numero"><%=autenticado.seguidores%></h4>
             <h4 class="seguido">Seguidores</h4>
             </div>
             </div>

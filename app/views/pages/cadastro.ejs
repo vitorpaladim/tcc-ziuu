@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="js/notify.js"></script>
+    <!-- CSS -->
+    <!-- https://github.com/simple-notify/simple-notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
+</head>
+<body>
+  <% 
+    let msgErro = {"nome":"", "email":"",senha:""};
+    let avisoErro = {"nome":"", "email":"",senha:""};
+    if(listaErros){
+        listaErros.errors.forEach(function(itemErro){
+            if(itemErro.path == "nome"){
+                avisoErro.nome = "erro";
+                msgErro.nome += " "+itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo nome<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.senha = "erro";
+                msgErro.senha = itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo senha<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%                
+            }
+            if(itemErro.path == "email"){
+                avisoErro.email = "erro";
+                msgErro.email = itemErro.msg;
+                %>
+                <script>
+                    notify("Erro no preenchimento","Verifique o campo e-mail<br><%= itemErro.msg%>", "error", "center")                        
+                </script>
+                <%
+            }
+        })
+    }
+    if (dadosNotificacao) { %>
+        <script>
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/"}, 3000)
+                }                        
+        </script>
+    <% } %>
+  
+
+    <div class="container">
+        <div class="registration form">
+            <header>Começe aqui</header>
+            <form action="/cadastrar" method="POST">
+      
+              <input 
+              type="text" 
+              name="nome"
+              class="<%= avisoErro.nome %>"
+              placeholder="Nome"
+              required
+              >
+              <span> <%= msgErro.nome %> </span> 
+              <input 
+              type="text" 
+              name="email"
+              class="<%= avisoErro.email %>"
+              placeholder="Email"
+              required
+              >
+              <span> <%= msgErro.email %> </span> 
+              <input 
+              type="text" 
+              name="usuario"
+              class="<%= avisoErro.nome %>"
+              placeholder="Usuário"
+              required
+              >
+              <span> <%= msgErro.nome %> </span> 
+              <input 
+              type="password" 
+              name="senha"
+              class="<%= avisoErro.senha %>"
+              placeholder="Senha"
+              required
+              >
+              <span> <%= msgErro.senha %> </span> 
+              <p class="text">
+                Me cadastrando, eu concordo com os
+                <a href="/terms">Termos e condições</a> e com a
+                <a href="/privacy">Politica de privacidade</a>
+              </p>
+             
+              <button class="button">Cadastrar</button>
+            </form>
+      
+            <div class="signup">
+              <h6>Já tem uma conta?</h6>
+              <a href="/login" class="toggle">Entre aqui!</a>
+            </div>
+          </div>
+    </div>
+    
+</body>
+</html>

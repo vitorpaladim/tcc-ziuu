@@ -75,11 +75,11 @@ function myMiddleware(req, res, next) {
     res.render("pages/home", req.session.autenticado);
   });
 
-  router.get("/usuario", verificarUsuAutenticado, function (req, res) {
+  router.get("/usuario", verificarUsuAutenticado, verificarUsuAutorizado([1, 2, 3], "pages/login"),function (req, res) {
     if (req.session.autenticado.autenticado == null) {
       res.render("pages/login")
   } else {
-      res.render("pages/usuario",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+      res.render("pages/perfil",{autenticado: req.session.autenticado, retorno: null, erros: null})}
   
   });
   

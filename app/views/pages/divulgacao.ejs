@@ -4,24 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divulgação - Ziuu</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Fira+Code:wght@300&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Shrikhand&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+
+    <link rel="stylesheet" href="/css/divulgacao.css">
 </head>
 <body>
-    <section>
-        <form action="/postar" method="post" enctype="multipart/form-data">
-            <div>
-                <img src="" alt="">
-                <input type="text" value="" name="usuario_divulgacao" autocomplete="off">
+    <nav>
+
+        <div class="container">
+            <a href="/home" class="logo"><img src="/img/logo_ziuu.png" alt=""></a>
+             
+            <ul>
+                <li><a href="/home" ><i class="uil uil-estate"></i></a></li>
+                <li><a href="/divulgacao"><i class="uil uil-plus-circle"></i></a></li>
+                <li><a href="/divulgacao"><i class="uil uil-comment"></i></a></li>
+                
+            </ul>
+
+            <div class="cadastro">
+              <a href="/perfil"><img src="img/fotodeperfil.png" alt=""></a> <!--foto-->
             </div>
-            <div>
-                <input type="text" value="" name="titulo_divulgacao" id="" autocomplete="off">
+            
+            
+        </div>
+
+
+    </nav>
+
+    <div class="container">
+        <div class="left">
+           
+            <div class="perfil_divul">
+                <img src="/img/fotodeperfil.png" alt=""> <!--foto-->
+             <h3><%= autenticado.autenticado %></h3> <!--Nome-->
+             <h4 class="usuario"><%=autenticado.usuario%></h4><!--usuario-->
+
+             <a href="/perfil"><button class="button_perfil">Perfil</button></a>
+                
             </div>
-            <div>
-                <input type="file" name="img_divulgacao" autocomplete="off">
-                <button>Postar</button>
+                <div class="outros">
+
+                    <h3>Outros</h3>
+
+                    <a href="">Sobre nós</a>
+                    <br>
+                    <a href="">Termos e condições</a>
+                    <br>
+                    <a href="">Politica de privacidade</a>
+
+
+
+                </div>
+
+        </div>
+
+        <div class="middle">
+
+            <section class="postar">
+                <form action="/postar" method="post" enctype="multipart/form-data">
+                    <div>
+                        <img src="" alt="">
+                        <input class="usuario_divulgacao" type="text" value="" name="usuario_divulgacao" autocomplete="off">
+                    </div>
+                    <div>
+                        <input type="text" value="" name="titulo_divulgacao" id="" autocomplete="off">
+                    </div>
+                    <div class="img_post">
+                        <input class="img_divulgacao" type="file" name="img_divulgacao" autocomplete="off">
+                        <button>Postar</button>
+                    </div>
+                </form>
+                
+            </section>
+
+
+            
+        </div>
+
+        <div class="right">
+
+            <div class="comunidades">
+
+                    <h3>Comunidades</h3>
+                    <ul>
+                        <li>#artesvisuais</li>
+                        <li>#musicas</li>
+                        <li>#artedigital</li>
+                        <li>#artesanato</li>
+                        <li>#audiovisual</li>
+                        
+                    </ul>
+                    
+                  <a href="/comunidades"><input type="button" value="Ver mais"></a>
+
             </div>
-        </form>
+
+
         
-    </section>
+        </div>
+
+    </div>
+
+
+
+
     <section>
         <% post.forEach(function(divulgacao){ %>
         <div>

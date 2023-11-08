@@ -4,13 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divulgação - Ziuu</title>
+    <script src="js/notify.js"></script>
+    <!-- CSS -->
+    <!-- https://github.com/simple-notify/simple-notify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 </head>
 <body>
+    <% 
+  let msgErro = {"usuario_divulgacao":"", "titulo_divulgacao":""};
+  let avisoErro = {"usuario_divulgacao":"", "titulo_divulgacao":""};
+  if(listaErros){
+      listaErros.errors.forEach(function(itemErro){
+          if(itemErro.path == "usuario_divulgacao"){
+              avisoErro.usuario_divulgacao = "erro";
+              msgErro.usuario_divulgacao += " "+itemErro.msg;
+              %>
+              <script>
+                  notify("Erro no preenchimento","Verifique o campo usuario<br><%= itemErro.msg%>", "error", "center")                        
+              </script>
+              <%
+          }
+          if(itemErro.path == "titulo_divulgacao"){
+              avisoErro.titulo_divulgacao = "erro";
+              msgErro.titulo_divulgacao = itemErro.msg;
+              %>
+              <script>
+                  notify("Erro no preenchimento","Verifique o campo descrição<br><%= itemErro.msg%>", "error", "center")                        
+              </script>
+              <%                
+          }
+          
+      })
+  }
+  if (dadosNotificacao) { %>
+      <script>
+              notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+              if("<%= dadosNotificacao.tipo %>" == "success"){
+                  setTimeout(function(){window.location="/"}, 3000)
+              }                        
+      </script>
+  <% } %>
     <section>
         <form action="/postar" method="post" enctype="multipart/form-data">
             <div>
                 <img src="" alt="">
-                <input type="text" value="" name="usuario_divulgacao" autocomplete="off">
+                <input type="text" value="<%=autenticado.autenticado%>" name="usuario_divulgacao" autocomplete="off">
             </div>
             <div>
                 <input type="text" value="" name="titulo_divulgacao" id="" autocomplete="off">

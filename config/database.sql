@@ -13,11 +13,14 @@ CREATE TABLE usuarios (
   primary key (`id`)
 );
 
+
+
 CREATE TABLE divulgacao (
-  id_divulgacao varchar(200) primary key,
+  id_divulgacao int not null auto_increment,
   img_divulgacao varchar (255),
   usuario_divulgacao varchar(60) NOT NULL,
-  titulo_divulgacao varchar(255) NOT NULL  
+  titulo_divulgacao varchar(255) NOT NULL,
+  primary key(`id_divulgacao`)
 );
 
 create table `tipo_usuario` (

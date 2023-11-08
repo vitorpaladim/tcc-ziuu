@@ -112,44 +112,41 @@ router.get("/paineladministrativo", verificarUsuAutorizado([2, 3], ("pages/restr
 }
 )
 
-router.post("/postar", 
-upload.single('img_divulgacao'),
+router.post("/postar",
+  upload.single('img_divulgacao'),
   async function(req, res){
-  const dadosPost = {
-    img_divulgacao: req.body.img_divulgacao,
-    usuario_divulgacao: req.body.usuario_divulgacao,
-    titulo_divulgacao: req.body.titulo_divulgacao
-  } 
-
-//   if (!dadosPost.img_divulgacao || !dadosPost.titulo_divulgacao) {
-//     return res.status(400).send('Por favor, preencha todos os campos.');
-// }
-
-if (!req.file) {
-  console.log("Falha no carregamento");
-} else {
-  caminhoArquivo = "img/posts/" + req.file.filename;
-  dadosPost.img_divulgacao = caminhoArquivo
-  console.log(req.file)
-}
-
-const id_divulgacao = uuid.v4();
-
-  const query = 'INSERT INTO divulgacao (id_divulgacao, img_divulgacao, usuario_divulgacao, titulo_divulgacao) VALUES (?, ?, ?, ?)';
-        const values = [id_divulgacao, dadosPost.img_divulgacao, dadosPost.usuario_divulgacao, dadosPost.titulo_divulgacao];
-
-        db.query(query, values, (err, result) => {
-          if (err) {
-            console.error('Erro ao inserir dados no banco de dados:', err);
-          } else {
-            console.log('Dados inseridos com sucesso!');
-          }
-        });
-
-        res.redirect("pages/divulgacao",{autenticado: req.session.autenticado, retorno: null, erros: null})
+    const formDivulgacao = {
+        img_divulgacao: req.body.img_divulgacao,
+        usuario_divulgacao: req.body.usuario_divulgacao,
+        titulo_divulgacao: req.body.titulo_divulgacao
+    }
+    if (!req.file) {
+      console.log("Falha no carregamento");
+    } else {
+      caminhoArquivo = "img/posts/" + req.file.filename;
+      formDivulgacao.img_divulgacao = caminhoArquivo
+      console.log(req.file)
+    }
+    try {
+      let insert = await postDAL.create(formDivulgacao);
+      console.log(insert);
+      // res.render("pages/divulgacao", {
+      //   listaErros: null, dadosNotificacao: {
+      //     titulo: "Post publicado!", mensagem: "publicado com o id " + insert.insertId + "!", tipo: "success"
+      //   }, valores: req.body
+      // })
+      res.redirect("/divulgacao")
+    } catch (e) {
+      // res.render("pages/divulgacao", {
+      //   listaErros: erros, dadosNotificacao: {
+      //     titulo: "Erro ao publicar!", mensagem: "Verifique os valores digitados!", tipo: "error"
+      //   }, valores: req.body
+      // })
+      res.redirect("/divulgacao")
+    }
+  }
   
-        console.log(dadosPost)
-})
+  )
 
 router.get("/divulgacao", async function(req, res){
   try {
@@ -167,7 +164,7 @@ router.get("/divulgacao", async function(req, res){
   
       console.log("auth --> ")
       console.log(req.session.autenticado)
-      res.render("pages/divulgacao",{ post: results, paginador: paginador, autenticado:req.session.autenticado} );
+      res.render("pages/divulgacao",{ post: results, paginador: paginador, autenticado:req.session.autenticado, listaErros: null, dadosNotificacao: null} );
     } catch (e) {
       console.log(e); // console log the error so we can see it in the console
       res.json({ erro: "Falha ao acessar dados" });

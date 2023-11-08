@@ -91,11 +91,14 @@ router.get("/registro", function(req, res){
 );
 
 
-
-
 router.get("/login", function(req, res){
     res.render("pages/login", {retorno: null, erros: null})}
 );
+
+router.get("/perfil", function(req, res){
+  res.render("pages/perfil", {retorno: null, erros: null})}
+);
+
 
 router.get("/sessao", function(req, res){
     res.render("pages/iniciosessao", {retorno: null, erros: null})}

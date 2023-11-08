@@ -104,6 +104,10 @@ router.get("/sessao", function(req, res){
     res.render("pages/iniciosessao", {retorno: null, erros: null})}
 );
 
+router.get("/update", function(req, res){
+  res.render("pages/update", {retorno: null, erros: null})}
+);
+
 
 
 router.get("/paineladministrativo", verificarUsuAutorizado([2, 3], ("pages/restrito")), function (req, res){

@@ -143,6 +143,13 @@ nav {
         width: 7%;
         
     }
+
+    .fotodeperfil{
+        width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+    }
     
 
 .container {
@@ -162,6 +169,14 @@ nav {
     flex-grow: 1;
     justify-content: center; /* Alinha horizontalmente ao centro */
 
+}
+
+.perfil_divul img {
+  
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    overflow: hidden; 
 }
 
 .postar{

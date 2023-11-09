@@ -108,6 +108,18 @@ router.get("/update", function(req, res){
   res.render("pages/update", {retorno: null, erros: null})}
 );
 
+router.get("/terms", function(req, res){
+  res.render("pages/terms", {retorno: null, erros: null})}
+);
+
+router.get("/privacy", function(req, res){
+  res.render("pages/privacy", {retorno: null, erros: null})}
+);
+
+router.get("/comunidades", function(req, res){
+  res.render("pages/comunidades", {retorno: null, erros: null})}
+);
+
 
 
 router.get("/paineladministrativo", verificarUsuAutorizado([2, 3], ("pages/restrito")), function (req, res){

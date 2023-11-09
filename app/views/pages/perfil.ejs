@@ -24,12 +24,12 @@
             <ul>
                 <li><a href="/home" ><i class="uil uil-estate"></i></a></li>
                 <li><a href="/divulgacao"><i class="uil uil-plus-circle"></i></a></li>
-                <li><a href="/divulgacao"><i class="uil uil-comment"></i></a></li>
+                <li><a href="/comunidades"><i class="uil uil-comment"></i></a></li>
                 
             </ul>
 
             <div class="cadastro">
-              <a href="/perfil"><img src="/img/fotodeperfil2.jpg" alt=""  class="fotodeperfil"></a> <!--foto-->
+              <a href="/perfil"><img src="/img/fotodeperfil2.png" alt=""  class="fotodeperfil"></a> <!--foto-->
             </div>
             
             
@@ -41,7 +41,7 @@
         <div class="left">
            
             <div class="info">
-                <h3>Suas informações</h3>
+                <h3 class="Suasinformações">Suas informações</h3>
 
                 <div class="user-info">
                     <div class="icon" id="edit-icon" >
@@ -51,12 +51,12 @@
 
                     <div class="informações">
                 
-                    <p>Nome:</p>
-                    <span><%= autenticado.autenticado%></span>
-                    <p>Usuário:</p>
-                    <span><%= autenticado.usuario%></span>
-                    <p>Email:</p>
-                    <span><%= autenticado.email%></span>
+                      <p>Nome:</p>
+                      <span><%= autenticado.autenticado%></span>
+                      <p>Usuário:</p>
+                      <span><%= autenticado.usuario%></span>
+                      <p>Email:</p>
+                      <span><%= autenticado.email%></span>
 
                     </div>
 
@@ -69,13 +69,13 @@
             </div>
                 <div class="outros">
 
-                    <h3>Outros</h3>
+                    <h3 class="outros_titul">Outros</h3>
 
                     <a href="">Sobre nós</a>
                     <br>
-                    <a href="">Termos e condições</a>
+                    <a href="/terms">Termos e condições</a>
                     <br>
-                    <a href="">Politica de privacidade</a>
+                    <a href="/privacy">Politica de privacidade</a>
 
 
 
@@ -88,15 +88,20 @@
 
             <div class="cabecalho">
 
-            <img src="/img/fotodeperfil2.jpg" alt=""  class="fotodeperfil2"> <!--foto-->
+            <img src="/img/fotodeperfil.png" alt=""  class="fotodeperfil2"> <!--foto-->
             <h3><%= autenticado.autenticado %></h3> <!--Nome-->
             <h4 class="usuario"><%=autenticado.usuario%></h4><!--usuario-->
            
            
 
             <div class="segui">
-            <h4 class="numero"><%=autenticado.seguidores%></h4>
+            <h4 class="numero"><%=autenticado.seguidores%>0</h4>
             <h4 class="seguido">Seguidores</h4>
+
+            <input type="checkbox" class="toggle" id="botao">
+            <label for="botao"></label>
+
+
             </div>
             </div>
 
@@ -105,18 +110,22 @@
                     <form action="/postar" method="post" enctype="multipart/form-data">
                         <div>
                             <img src="" alt="">
-                            <input class="usuario_divulgacao" type="text" value="" name="usuario_divulgacao" autocomplete="off">
+                            <input class="usuario_divulgacao" type="text" value="<%=autenticado.autenticado%>" name="usuario_divulgacao" autocomplete="off">
                         </div>
                         <div>
-                            <input type="text" value="" name="titulo_divulgacao" id="" autocomplete="off">
+                            <input class="usuario_divulgacao" type="text" value="" placeholder="Divulge..." name="titulo_divulgacao" id="" autocomplete="off">
                         </div>
                         <div class="img_post">
                             <input class="img_divulgacao" type="file" name="img_divulgacao" autocomplete="off">
                             <button>Postar</button>
                         </div>
                     </form>
+
+
                     
                 </section>
+
+                
             
         </div>
 
@@ -134,7 +143,7 @@
                         
                     </ul>
                     
-                  <a href="/comunidades"><input type="button" value="Ver mais"></a>
+                  <a href="/comunidades"><input class="vermais" type="button" value="Ver mais"></a>
 
             </div>
 

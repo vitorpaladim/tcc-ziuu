@@ -195,3 +195,41 @@ background-color: #D9D9D9;
 .comu_comunidades li:hover{
     color: #000000;
 }
+
+
+
+
+.message-input {
+    position: fixed;
+    bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    right: 0;
+    width: 1000px;
+    background-color: #fff;
+    border: none;
+    padding: 1.5%;
+    border-radius: 10px;
+    margin-right: 5%;
+    margin-bottom: 2%;
+}
+
+.send-button{
+    position: fixed;
+    font-family: 'Poppins', sans-serif;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    background-color: #20A195;
+    border: none;
+    padding: 1%;
+    border-radius: 10px; 
+    margin-right: 1%;
+    margin-bottom: 2.5%;
+cursor: pointer;
+    color: #fff;
+}
+
+.titul{
+ padding: 2%;
+ color: #000000;
+}

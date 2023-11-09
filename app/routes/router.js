@@ -120,6 +120,25 @@ router.get("/comunidades", function(req, res){
   res.render("pages/comunidades", {retorno: null, erros: null})}
 );
 
+router.get("/comunidades_artesvisuais", function(req, res){
+  res.render("pages/comunidades_artesvisuais", {retorno: null, erros: null})}
+);
+
+router.get("/comunidades_musicas", function(req, res){
+  res.render("pages/comunidades_musicas", {retorno: null, erros: null})}
+);
+
+router.get("/comunidades_artedigital", function(req, res){
+  res.render("pages/comunidades_artedigital", {retorno: null, erros: null})}
+);
+
+router.get("/comunidades_artesanato", function(req, res){
+  res.render("pages/comunidades_artesanato", {retorno: null, erros: null})}
+);
+
+router.get("/comunidades_audiovisual", function(req, res){
+  res.render("pages/comunidades_audiovisual", {retorno: null, erros: null})}
+);
 
 
 router.get("/paineladministrativo", verificarUsuAutorizado([2, 3], ("pages/restrito")), function (req, res){

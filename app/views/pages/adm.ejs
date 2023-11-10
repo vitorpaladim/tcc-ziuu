@@ -38,6 +38,8 @@
 
     </nav>
    
+
+<div class="painel">
     <h1>Painel Administrativo</h1>
     <table>
         <thead>
@@ -57,7 +59,7 @@
                 <td><%=usuario.email%></td>
                 <td><%=usuario.id_tipo_usuario %></td>
                 <td>
-                    <button onclick="<%=" window.location='/excluir/"+ usuario.id %>'" >
+                    <button  class="delet" onclick="<%=" window.location='/excluir/"+ usuario.id %>'" >
                         delete
                     </button>
                 </td>
@@ -93,5 +95,7 @@
 <%
     }
         %>
+
+</div>
 </body>
 </html>

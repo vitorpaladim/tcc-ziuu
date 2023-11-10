@@ -136,7 +136,7 @@ nav {
     }
 
     nav i:hover{
-        color: #20A195;
+        color: #000000;
     }
 
 
@@ -232,4 +232,9 @@ cursor: pointer;
 .titul{
  padding: 2%;
  color: #000000;
+}
+
+.chat1 img{
+    width: 4%;
+    
 }

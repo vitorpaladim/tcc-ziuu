@@ -95,7 +95,9 @@ router.post("/cadastrar",
           console.log('Dados inseridos com sucesso!');
         }
     }); 
- */
+ */ 
+
+    
     // Redireciona para a página de login após um atraso.
     setTimeout(function () {
         res.render("pages/login", { email: dadosForm.email });

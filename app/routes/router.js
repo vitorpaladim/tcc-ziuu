@@ -25,10 +25,10 @@ var upload = multer({ storage: storagePasta });
 
 
 const db = mysql.createConnection({
-    host: "roundhouse.proxy.rlwy.net",
-    user: "root",
-    password: "bH3fHdh--e42a1cFdbeh-e3hFegF326d",
-    database: "Tables",
+  host     : 'viaduct.proxy.rlwy.net',
+  user     : 'root',
+  password : '526-1G5EbHaAf23ehFcDA-HGGfBcg1cF',
+  database : 'Tables',
     port: 51833
   });
 

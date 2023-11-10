@@ -5,6 +5,7 @@ var mysql = require("mysql2");
 const uuid = require('uuid');
 var bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(10);
+require('dotenv').config()
 
 const multer = require('multer');
 const path = require('path');
@@ -20,16 +21,20 @@ var storagePasta = multer.diskStorage({
   }
 })
 
+
+
+const port = process.emv.PORT || '3300';
+
 var upload = multer({ storage: storagePasta });
 
 
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@ITB123456",
-    database: "ziuu",
-    port: 3306
+  host:   "viaduct.proxy.rlwy.net",
+  user:   "root",
+  password:   "526-1G5EbHaAf23ehFcDA-HGGfBcg1cF",
+  database:   "railway",
+    port: 3300
   });
 
   db.connect((err) => {

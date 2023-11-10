@@ -10,11 +10,11 @@ var fabricaDeConexao = require("../../config/connection-factory")
 var conexao = fabricaDeConexao
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@ITB123456",
-    database: "ziuu",
-    port: 3306
+  host:   "viaduct.proxy.rlwy.net",
+  user:   "root",
+  password:   "526-1G5EbHaAf23ehFcDA-HGGfBcg1cF",
+  database:   "railway",
+    port: 3300
 });
 
 db.connect((err) => {

@@ -1131,6 +1131,12 @@ footer h3{
     font-size: 100%;
 }
 
+footer i{
+    float: right;
+margin-top: -3.5%;
+font-size: 40px;
+color: #fff;
+}
 
 .logo-footer img{
     width: 52px;

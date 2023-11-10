@@ -27,7 +27,7 @@ var upload = multer({ storage: storagePasta });
 const db = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "",
+    password: "@ITB123456",
     database: "ziuu",
     port: 3306
   });
@@ -207,7 +207,7 @@ router.get("/divulgacao", async function(req, res){
   } );
 
 
-router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), async function(req, res){
+router.get("/adm", verificarUsuAutorizado([3], "pages/home"), async function(req, res){
   try {
 
       let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;

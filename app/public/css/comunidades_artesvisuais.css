@@ -234,7 +234,7 @@ cursor: pointer;
  color: #000000;
 }
 
-.chat1 img{
-    width: 4%;
-    
+.chat1 {
+ 
+    margin-top: 1.5%;
 }

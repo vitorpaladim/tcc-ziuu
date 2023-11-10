@@ -84,7 +84,7 @@ router.post("/cadastrar",
     const id = uuid.v4();
 
     // Query para inserir um novo usuário no banco de dados.
-    const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
+    const query = 'INSERT INTO usuarios (id, name, email, senha) VALUES (?, ?, ?, ?)';
     const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
 
     db.query(query, values, (err, result) => {

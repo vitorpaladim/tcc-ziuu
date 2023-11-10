@@ -9,7 +9,6 @@ const mysql = require("mysql2");
 /*var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao;*/
 
-/*
 const db = mysql.createConnection({
     host: "viaduct.proxy.rlwy.net",
     user: "root",
@@ -19,12 +18,13 @@ const db = mysql.createConnection({
 }); 
 
 // Conecta ao banco de dados.
+
 db.connect((err) => {
     if (err) {
       throw err;
     }
     console.log('Conectado ao MySQL');
-}); */
+}); 
 
 // Importa o módulo de acesso a dados do usuário.
 var UsuarioDAL = require("../models/UsuarioDAL");

@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const port = 3000
 
 app.use(express.static("app/public"));
 
@@ -9,9 +10,6 @@ app.set("views", "./app/views");
 var session = require("express-session");
 
 app.use(express.urlencoded({ extended: true }));
-
-var session = require("express-session");
-const port = process.env.PORT || '3000';
 
 // Configura a sessão
 app.use(session({

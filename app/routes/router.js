@@ -207,7 +207,7 @@ router.get("/divulgacao", async function(req, res){
   } );
 
 
-router.get("/adm", async function(req, res){
+router.get("/adm", verificarUsuAutorizado([3], "pages/restrito"), async function(req, res){
   try {
 
       let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;

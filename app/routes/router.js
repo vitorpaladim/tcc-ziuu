@@ -9,7 +9,7 @@ const mysql = require("mysql2");
 /*var fabricaDeConexao = require("../../config/connection-factory");
 var conexao = fabricaDeConexao;*/
 
-
+/*
 const db = mysql.createConnection({
     host: "viaduct.proxy.rlwy.net",
     user: "root",
@@ -24,7 +24,7 @@ db.connect((err) => {
       throw err;
     }
     console.log('Conectado ao MySQL');
-});
+}); */
 
 // Importa o módulo de acesso a dados do usuário.
 var UsuarioDAL = require("../models/UsuarioDAL");
@@ -87,6 +87,7 @@ router.post("/cadastrar",
     const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
     const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
 
+    /*
     db.query(query, values, (err, result) => {
         if (err) {
           console.error('Erro ao inserir dados no banco de dados:', err);
@@ -94,7 +95,7 @@ router.post("/cadastrar",
           console.log('Dados inseridos com sucesso!');
         }
     }); 
-
+ */
     // Redireciona para a página de login após um atraso.
     setTimeout(function () {
         res.render("pages/login", { email: dadosForm.email });

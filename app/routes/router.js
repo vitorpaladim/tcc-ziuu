@@ -87,7 +87,6 @@ router.post("/cadastrar",
     const query = 'INSERT INTO usuarios (id, nome, email, senha) VALUES (?, ?, ?, ?)';
     const values = [id, dadosForm.nome, dadosForm.email, dadosForm.senha];
 
-    /*
     db.query(query, values, (err, result) => {
         if (err) {
           console.error('Erro ao inserir dados no banco de dados:', err);
@@ -95,7 +94,7 @@ router.post("/cadastrar",
           console.log('Dados inseridos com sucesso!');
         }
     }); 
- */ 
+ 
 
     
     // Redireciona para a página de login após um atraso.

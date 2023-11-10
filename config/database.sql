@@ -31,5 +31,3 @@ create table `tipo_usuario` (
     primary key (`id_tipo_usuario`)
     
 );	
-
-

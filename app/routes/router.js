@@ -96,7 +96,7 @@ router.get("/login", function(req, res){
 );
 
 router.get("/perfil", function(req, res){
-  res.render("pages/perfil", {autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/perfil", {retorno: null, erros: null})}
 );
 
 
@@ -105,7 +105,7 @@ router.get("/sessao", function(req, res){
 );
 
 router.get("/update", function(req, res){
-  res.render("pages/update", {autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/update", {retorno: null, erros: null})}
 );
 
 router.get("/terms", function(req, res){
@@ -117,27 +117,27 @@ router.get("/privacy", function(req, res){
 );
 
 router.get("/comunidades", function(req, res){
-  res.render("pages/comunidades",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/comunidades", {retorno: null, erros: null})}
 );
 
 router.get("/comunidades_artesvisuais", function(req, res){
-  res.render("pages/comunidades_artesvisuais",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/comunidades_artesvisuais", {retorno: null, erros: null})}
 );
 
 router.get("/comunidades_musicas", function(req, res){
-  res.render("pages/comunidades_musicas", {autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/comunidades_musicas", {retorno: null, erros: null})}
 );
 
 router.get("/comunidades_artedigital", function(req, res){
-  res.render("pages/comunidades_artedigital", {autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/comunidades_artedigital", {retorno: null, erros: null})}
 );
 
 router.get("/comunidades_artesanato", function(req, res){
-  res.render("pages/comunidades_artesanato",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/comunidades_artesanato", {retorno: null, erros: null})}
 );
 
 router.get("/comunidades_audiovisual", function(req, res){
-  res.render("pages/comunidades_audiovisual", {autenticado: req.session.autenticado, retorno: null, erros: null})}
+  res.render("pages/comunidades_audiovisual", {retorno: null, erros: null})}
 );
 
 

@@ -10,6 +10,7 @@ app.set("views", "./app/views");
 var session = require("express-session");
 
 app.use(express.urlencoded({ extended: true }));
+ 
 
 // Configura a sessão
 app.use(session({

@@ -6,8 +6,8 @@ const uuid = require("uuid");
 const mysql = require("mysql2");
 
 // Importa a fábrica de conexões e cria uma conexão ao banco de dados.
-/*var fabricaDeConexao = require("../../config/connection-factory");
-var conexao = fabricaDeConexao;*/
+var fabricaDeConexao = require("../../config/connection-factory");
+var conexao = fabricaDeConexao;
 
 const db = mysql.createConnection({
     host: "viaduct.proxy.rlwy.net",
@@ -28,7 +28,7 @@ db.connect((err) => {
 
 // Importa o módulo de acesso a dados do usuário.
 var UsuarioDAL = require("../models/UsuarioDAL");
-var usuarioDAL = new UsuarioDAL(null);
+var usuarioDAL = new UsuarioDAL(conexao);
 
 // Importa middlewares de autenticação e validação de entrada.
 var { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../models/autenticador_middleware");

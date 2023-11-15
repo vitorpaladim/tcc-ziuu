@@ -31,7 +31,7 @@ module.exports = class PostDAL {
 
     findID(id) {
         return new Promise((resolve, reject) => {
-            this.conexao.query('SELECT * FROM divulgacao WHERE  id_noticia = ?', [id], function (error, elements) {
+            this.conexao.query("SELECT * FROM divulgacao WHERE id_divulgacao = ?", [id], function (error, elements) {
                     if (error) {
                         return reject(error);
                     }

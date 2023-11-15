@@ -11,12 +11,13 @@
     <div class="container">
         <div class="registration form">
             <header>Atualize seus dados</header>
-            <form action="" method="POST">
+            <form action="/perfil" method="POST" enctype="multipart/form-data">
       
               <input 
               type="text" 
               name="nome"
               class=""
+              value="<%=autenticado.nome%>"
               placeholder="Nome"
               
               >
@@ -25,6 +26,7 @@
               type="text" 
               name="usuario"
               class=""
+              value="<%=autenticado.usuario%>"
               placeholder="Usuário"
              
               >
@@ -34,11 +36,20 @@
               type="text" 
               name="email"
               class=""
+              value="<%=autenticado.email%>"
               placeholder="Email"
             
               >
+
+              <div class="senha" id="all-in">
+                <label for="">Senha</label>
+                <input type="password" name="senha" id="senha" placeholder="Alterar senha">
+                <span class="aviso">(Não preencher para manter a senha atual)</span>
+              </div>   
              
-              <input class="img" type="file" name="" autocomplete="off">
+              <label for="">Foto de perfil</label>
+              <input class="img" type="file" name="img_usuario" autocomplete="off">
+              <img class="img-perfil" id="img-preview" src="<%= autenticado.img_usuario %>">
              
               <button class="button">Atualizar</button>
             </form>

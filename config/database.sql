@@ -1,27 +1,26 @@
 CREATE DATABASE `ziuu`;
 USE `ziuu`;
 
-
-DROP TABLE IF EXISTS `usuarios`;
-use `ziuu`;
 CREATE TABLE usuarios (
-  id int not null auto_increment,
+  id int not null auto_increment primary key,
   nome varchar(255) NOT NULL,
   email varchar(60) NOT NULL,
   senha longtext NOT NULL,
-  id_tipo_usuario int not null default '1',
-  primary key (`id`)
+  usuario varchar(55),
+  img_usuario varchar(255) default '/img/fotodeperfil3.png',
+  id_tipo_usuario int not null default '1'
 );
-
 
 
 CREATE TABLE divulgacao (
-  id_divulgacao int not null auto_increment,
-  img_divulgacao varchar (255),
+  id_divulgacao int not null auto_increment primary key, 
+  img_divulgacao varchar(255),
   usuario_divulgacao varchar(60) NOT NULL,
   titulo_divulgacao varchar(255) NOT NULL,
-  primary key(`id_divulgacao`)
+  id_usuario int,
+  foreign key (id_usuario) references usuarios(id)
 );
+
 
 create table `tipo_usuario` (
 	id_tipo_usuario int not null auto_increment,
@@ -31,3 +30,6 @@ create table `tipo_usuario` (
     primary key (`id_tipo_usuario`)
     
 );	
+
+
+

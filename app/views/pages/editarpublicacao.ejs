@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Sempre quando for colocar uma img ou alguma pagina usar o ../(diretorio que busca) ex: ../img/perfil -->
+    <% divulgacao.forEach(function(post){ %>
+        <form action="/editarpost" method="post">
+            <img src="../<%=post.img_divulgacao%>" alt="">
+            <input type="text" name="titulo_divulgacao" value="<%=post.titulo_divulgacao%>">
+            <button>Editar</button>
+        </form>
+    
+    <% }); %>
+    <a href="">
+        
+    </a>
+</body>
+</html>

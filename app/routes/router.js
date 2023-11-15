@@ -29,13 +29,22 @@ var upload = multer({ storage: storagePasta });
 
 
 
-const db = mysql.createConnection({
-  host:   "viaduct.proxy.rlwy.net",
-  user:   "root",
-  password:   "526-1G5EbHaAf23ehFcDA-HGGfBcg1cF",
-  database:   "railway",
-    port: 3300
-  });
+// const db = mysql.createConnection({
+//   host:   "viaduct.proxy.rlwy.net",
+//   user:   "root",
+//   password:   "526-1G5EbHaAf23ehFcDA-HGGfBcg1cF",
+//   database:   "railway",
+//     port: 3300
+//   });
+
+
+  const db = mysql.createConnection({
+    host:   "127.0.0.1",
+        user:   "root",
+        password:   "@ITB123456",
+        database:   "ziuu",
+        port:   "3306"
+    });
 
   db.connect((err) => {
     if (err) {
@@ -80,13 +89,77 @@ function myMiddleware(req, res, next) {
     res.render("pages/home", req.session.autenticado);
   });
 
-  router.get("/usuario", verificarUsuAutenticado, function (req, res) {
-    if (req.session.autenticado.autenticado == null) {
-      res.redirect("/login")
-  } else {
-      res.render("pages/perfil",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+  // router.get("/usuario", verificarUsuAutenticado, function (req, res) {
+  //   if (req.session.autenticado.autenticado == null) {
+  //     res.redirect("/login")
+  // } else {
+  //     res.render("pages/perfil",{autenticado: req.session.autenticado, retorno: null, erros: null})}
+      
+    
+  // });
   
+
+  // router.get("/usuario", verificarUsuAutenticado, function (req, res) {
+  //   if (req.session.autenticado == null) {
+  //     res.redirect("/login");
+  //   } else {
+  //     const idUsuario = req.session.autenticado.id;
+  
+  //     try {
+  //       // Buscar postagens do usuário com base no ID
+  //       const sql = 'SELECT * FROM postagem WHERE id_usuario = ?';
+  //       db.query(sql, [idUsuario], (err, result) => {
+  //         if (err) {
+  //           res.status(500).json({ error: 'Erro ao buscar postagens' });
+  //         } else {
+  //           res.status(200).json({ postagens: result });
+  //         }
+  //       });
+  //     } catch (error) {
+  //       res.status(500).json({ error: 'Erro ao buscar postagens' });
+  //     }
+  //   }
+  // });
+
+  router.get("/usuario", verificarUsuAutenticado, function (req, res) {
+    if (req.session.autenticado == null) {
+      res.redirect("/login");
+    } else {
+      const idUsuario = req.session.autenticado.id;
+  
+      try {
+        // Buscar postagens do usuário com base no ID
+        const sql = 'SELECT * FROM divulgacao WHERE id_usuario = ?';
+        db.query(sql, [idUsuario], (err, result) => {
+          if (err) {
+            res.status(500).json({ error: 'Erro ao buscar postagens' });
+          } else {
+            // Verifica se não há erro e se o resultado está vazio
+            if (!err && result.length === 0) {
+              res.redirect("/login")
+            } else {
+              res.render('pages/perfil', { divulgacao: result, autenticado: req.session.autenticado});
+            }
+          }
+        });
+      } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar postagens' });
+      }
+    }
   });
+
+  router.get("/editarpublicacao/:id_divulgacao", async function (req, res) {
+    try {
+      result = await postDAL.findID(req.params.id_divulgacao)
+      console.log(result)
+      res.render("pages/editarpublicacao", { divulgacao: result, autenticado: req.session.autenticado, login: req.res.autenticado })
+  
+    } catch {
+      res.redirect("/usuario")
+    }
+  })
+  
+  
   
 
   
@@ -110,7 +183,7 @@ router.get("/sessao", function(req, res){
 );
 
 router.get("/update", function(req, res){
-  res.render("pages/update", {retorno: null, erros: null})}
+  res.render("pages/update", {retorno: null, erros: null, autenticado: req.session.autenticado})}
 );
 
 router.get("/terms", function(req, res){
@@ -158,7 +231,8 @@ router.post("/postar",
     const formDivulgacao = {
         img_divulgacao: req.body.img_divulgacao,
         usuario_divulgacao: req.body.usuario_divulgacao,
-        titulo_divulgacao: req.body.titulo_divulgacao
+        titulo_divulgacao: req.body.titulo_divulgacao,
+        id_usuario: req.session.autenticado.id
     }
     if (!req.file) {
       console.log("Falha no carregamento");
@@ -356,5 +430,95 @@ router.post("/cadastrar",
       res.redirect("/");
     });
 
+
+    router.post("/editarpost",
+    async function(req, res){
+      var dadosPost = {
+        titulo_divulgacao: req.body.titulo_divulgacao
+      }
+      var id_divulgacao = req.query.id_divulgacao
+      console.log(dadosPost)
+      let resultUpdate = await postDAL.update(dadosPost, id_divulgacao);
+      
+      if (!resultUpdate.isEmpty) {
+        if (resultUpdate.changedRows == 1) {
+          var result = await postDAL.findID(id_divulgacao);
+          req.session.autenticado = autenticado;
+          var campos = {
+            none: result[0].nome, email: result[0].email,
+            img_usuario: result[0].img_usuario,
+            usuario: result[0].usuario, id_tipo_usuario: result[0].id_tipo_usuario, senha: ""
+          }
+          res.render("pages/update", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, autenticado: campos });
+        }
+      }
+
+    })
+
+
+    router.post("/perfil", upload.single('img_usuario'),
+  // body("nome")
+  //   .isLength({ min: 3, max: 50 }).withMessage("Mínimo de 3 letras e máximo de 50!"),
+  // body("cpf")
+  //   .isLength({ min: 8, max: 30 }).withMessage("8 a 30 caracteres!"),
+  // body("email")
+  //   .isEmail().withMessage("Digite um e-mail válido!"),
+  // body("telefone")
+  //   .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+  // verificarUsuAutorizado([1, 2, 3], "pages/login"),
+  async function (req, res) {
+    const erros = validationResult(req);
+    console.log(erros)
+    if (!erros.isEmpty()) {
+      return res.render("pages/perfil", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.body.autenticado})
+    }
+    try {
+      var dadosForm = {
+        nome: req.body.nome,
+        usuario: req.body.usuario,
+        email: req.body.email,
+        img_usuario: req.body.img_usuario,
+        id_tipo_usuario: 1
+      };
+      console.log("senha: " + req.body.senha)
+      if (req.body.senha != "") {
+        dadosForm.senha = bcrypt.hashSync(req.body.senha, salt);
+      }
+      if (!req.file) {
+        console.log("Falha no carregamento");
+      } else {
+        caminhoArquivo = "img/posts/" + req.file.filename;
+        dadosForm.img_usuario = caminhoArquivo
+      }
+      console.log(dadosForm);
+
+      let resultUpdate = await usuarioDAL.update(dadosForm, req.session.autenticado.id);
+      if (!resultUpdate.isEmpty) {
+        if (resultUpdate.changedRows == 1) {
+          var result = await usuarioDAL.findID(req.session.autenticado.id);
+          var autenticado = {
+            nome: result[0].nome,
+            id: result[0].id,
+            email: result[0].email,
+            usuario: result[0].usuario,
+            img_usuario: result[0].img_usuario,
+            id_tipo_usuario: result[0].id_tipo_usuario
+            
+          };
+          req.session.autenticado = autenticado;
+          var campos = {
+            none: result[0].nome, email: result[0].email,
+            img_usuario: result[0].img_usuario,
+            usuario: result[0].usuario, id_tipo_usuario: result[0].id_tipo_usuario, senha: ""
+          }
+          res.render("pages/update", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, autenticado: campos });
+        }
+      }
+    } catch (e) {
+      console.log(e)
+      res.render("pages/update", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, autenticado: req.body })
+    }
+
+  });
 
 module.exports = router;

@@ -87,7 +87,7 @@
 
             <div class="cabecalho">
 
-            <img src="/img/fotodeperfil3.png" alt=""  class="fotodeperfil2"> <!--foto-->
+            <img src="<%=autenticado.img_usuario%>" alt=""  class="fotodeperfil2"> <!--foto-->
             <h3><%= autenticado.autenticado %></h3> <!--Nome-->
             <h4 class="usuario"><%=autenticado.usuario%></h4><!--usuario-->
            
@@ -122,6 +122,27 @@
 
 
                     
+                </section>
+                <section>
+                    <% divulgacao.forEach(function(post){ %>
+                    <div class="postagem">
+                        <div>   
+                            <img class="img_postagem" src="<%= post.img_divulgacao%>" alt="">
+                        </div>
+                        <div>
+                            <img src="" alt="">
+                        </div>
+                        <div>
+                            <img src="" alt="">
+                           
+                            <h4 class="nome_postagem"><%=post.usuario_divulgacao%></h4>
+                            <span class="titulo_postagem"><%= post.titulo_divulgacao%></span>
+                        </div>
+                        <a href="/editarpublicacao/<%=post.id_divulgacao%>">
+                            <button>Editar publicação</button>
+                        </a>
+                    </div>
+                    <% }); %>
                 </section>
 
                 

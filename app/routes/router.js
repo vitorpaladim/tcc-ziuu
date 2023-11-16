@@ -504,11 +504,11 @@ router.post("/cadastrar",
           };
           req.session.autenticado = autenticado;
           var campos = {
-            none: result[0].nome, email: result[0].email,
+            autenticado: result[0].nome, nome: result[0].nome, id: result[0].id, email: result[0].email,
             img_usuario: result[0].img_usuario,
             usuario: result[0].usuario, id_tipo_usuario: result[0].id_tipo_usuario, senha: ""
           }
-          res.render("pages/update", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, autenticado: campos });
+          res.render("pages/home", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, autenticado: campos });
         }
       }
     } catch (e) {

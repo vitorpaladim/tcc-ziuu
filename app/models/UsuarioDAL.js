@@ -50,12 +50,13 @@ module.exports = class UsuarioDAL {
 
     findID(id) {
         return new Promise((resolve, reject) => {
-            this.conexao.query("SELECT id, nome, senha, email, FROM usuarios", [id], function(error, elements){
-                if (error) {
-                    return reject(error);
-                }
-                return resolve(elements);
-            });
+            this.conexao.query("SELECT * FROM usuarios WHERE id = ?", [id], function (error, elements) {
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    return resolve(elements);
+                });
         });
     };
 

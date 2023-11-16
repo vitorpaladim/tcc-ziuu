@@ -431,25 +431,22 @@ router.post("/cadastrar",
     });
 
 
-    router.post("/editarpost",
+    router.post("/editarpost/:id_divulgacao",
     async function(req, res){
       var dadosPost = {
         titulo_divulgacao: req.body.titulo_divulgacao
       }
-      var id_divulgacao = req.query.id_divulgacao
+      var id_divulgacao = req.params.id_divulgacao
       console.log(dadosPost)
       let resultUpdate = await postDAL.update(dadosPost, id_divulgacao);
       
       if (!resultUpdate.isEmpty) {
         if (resultUpdate.changedRows == 1) {
           var result = await postDAL.findID(id_divulgacao);
-          req.session.autenticado = autenticado;
           var campos = {
-            none: result[0].nome, email: result[0].email,
-            img_usuario: result[0].img_usuario,
-            usuario: result[0].usuario, id_tipo_usuario: result[0].id_tipo_usuario, senha: ""
+            titulo_divulgacao: result[0].titulo_divulgacao
           }
-          res.render("pages/update", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "", tipo: "success" }, autenticado: campos });
+          res.redirect("/usuario")
         }
       }
 

@@ -9,7 +9,7 @@
 
     <!-- Sempre quando for colocar uma img ou alguma pagina usar o ../(diretorio que busca) ex: ../img/perfil -->
     <% divulgacao.forEach(function(post){ %>
-        <form action="/editarpost" method="post">
+        <form action="/editarpost/<%=post.id_divulgacao%>" method="post">
             <img src="../<%=post.img_divulgacao%>" alt="">
             <input type="text" name="titulo_divulgacao" value="<%=post.titulo_divulgacao%>">
             <button>Editar</button>

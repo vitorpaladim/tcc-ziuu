@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="/css/editarpublicacao.css">
 </head>
 <body>
 
     <!-- Sempre quando for colocar uma img ou alguma pagina usar o ../(diretorio que busca) ex: ../img/perfil -->
     <% divulgacao.forEach(function(post){ %>
-        <form action="/editarpost/<%=post.id_divulgacao%>" method="post">
-            <img src="../<%=post.img_divulgacao%>" alt="">
-            <input type="text" name="titulo_divulgacao" value="<%=post.titulo_divulgacao%>">
-            <button>Editar</button>
+        <form class="editar_post" action="/editarpost/<%=post.id_divulgacao%>" method="post">
+            <img class="img_post" src="../<%=post.img_divulgacao%>" alt="">
+            <input class="editar_titulo" type="text" name="titulo_divulgacao" value="<%=post.titulo_divulgacao%>">
+            <button class="btn_post">Editar</button>
         </form>
     
     <% }); %>

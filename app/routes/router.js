@@ -158,6 +158,18 @@ function myMiddleware(req, res, next) {
       res.redirect("/usuario")
     }
   })
+
+  router.get("/deletarpublicacao/:id_divulgacao", function (req, res) {
+    var query = db.query(
+      "DELETE FROM divulgacao WHERE ?",
+      { id_divulgacao: req.params.id_divulgacao },
+      function (error, results, fields) {
+        if (error) throw error;
+      }
+    );  
+    res.redirect("/");
+  });
+  
   
   
   

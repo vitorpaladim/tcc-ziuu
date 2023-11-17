@@ -1,0 +1,71 @@
+:root{
+    --color-primary: #e2e2e2;
+    --color-primary-variant: #20A195;
+    --color-black: #000000;
+    --color-dark: #62656a;
+    --color-white: #fff;
+    --color-light: rgba(255, 255, 255, 0.8);
+
+    --width: 84%;
+    --mobile-width: 92%;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-dark);
+    background: var(--color-primary);
+}
+
+
+
+.editar_post{
+    background-color: #fff;
+    padding: 3%;
+    width: 80%;
+    border-radius: 20px;
+
+    color: #000000;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.img_post{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.editar_titulo{
+    margin-top: 3%;
+font-family: 'Poppins', sans-serif;
+width: 90%;
+height: 30px;
+padding:3%;
+border: none;
+border-radius: 6px;
+background-color: #D9D9D9;
+}
+
+.btn_post{
+    border: none;
+  border-radius: 7px;
+
+  background-color: #20A195;
+  color: #fff;
+  padding: 1% 2%;
+  width: 8%;
+  font-size: 100%;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
+}

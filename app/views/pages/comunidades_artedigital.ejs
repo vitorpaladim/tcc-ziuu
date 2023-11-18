@@ -40,10 +40,7 @@
     </nav>
 
     <div class="left-section">
-        <div class="comu_pesquisa">
-          <input type="search" placeholder="Pesquisar...">
-          <i class="uil uil-search"></i>
-        </div>
+        
 
        <div class="comu_comunidades">
          <h3>Comunidades</h3>
@@ -63,9 +60,21 @@
 
     </div>
 
-    <div class="input-container">
-        <input type="text" placeholder="Digite sua mensagem..." class="message-input">
-        <button class="send-button">Enviar</button>
-    </div>
+    <section class="postar">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div>
+                <img src="" alt="">
+                <input class="usuario_divulgacao" type="text" value="" name="usuario_divulgacao" autocomplete="off">
+            </div>
+            <div>
+                <input class="usuario_divulgacao" type="text" value="" name="titulo_divulgacao" id="" placeholder="Divulge..." autocomplete="off">
+            </div>
+            <div class="img_post">
+                <input class="img_divulgacao" type="file" name="img_divulgacao" autocomplete="off">
+                <button>Enviar</button>
+            </div>
+        </form>
+   </section>
+
 </body>
 </html>

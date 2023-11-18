@@ -238,3 +238,44 @@ cursor: pointer;
  
     margin-top: 1.5%;
 }
+
+.postar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  
+   
+   
+    z-index: 999; /* Garante que a seção fique acima de outros elementos */
+}
+
+.usuario_divulgacao1{
+    display: none;
+}
+
+.usuario_divulgacao2{
+    margin-top: 3%;
+    font-family: 'Poppins', sans-serif;
+    width: 600px;
+
+    padding: 3%;
+    border: none;
+    border-radius: 6px;
+    background-color: #D9D9D9;
+    }
+
+    .postar button{
+        border: none;
+        border-radius: 7px;
+     margin-left: 85%;
+      
+        background-color: #20A195;
+        color: #fff;
+        padding: 1% 2%;
+        width: 15%;
+        font-size: 100%;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
+        
+    }

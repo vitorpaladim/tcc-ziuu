@@ -21,6 +21,15 @@ CREATE TABLE divulgacao (
   foreign key (id_usuario) references usuarios(id)
 );
 
+CREATE TABLE comunidadeartes (
+  id_comunidade int not null auto_increment primary key,
+  id_usuario int,
+  usuario varchar(55),
+  mensagem varchar(1000),
+  foreign key (id_usuario) references usuarios(id),
+  foreign key (usuario) references usuarios(usuario)
+);
+
 
 create table `tipo_usuario` (
 	id_tipo_usuario int not null auto_increment,

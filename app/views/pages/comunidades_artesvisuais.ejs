@@ -58,20 +58,31 @@
     <div class="titul">
         <h3>Artes visuais</h3>
 
-    </div>
+    </div>  
+<section id="mensagens-geral">
+    <% mensagens.forEach(function(msg){ %>
+        <div id="mensagem">
+            <span><%=msg.usuario%></span>
+            <p><%=msg.mensagem%></p>
+            <img src="<%=msg.img_divulgacao%>" alt="">
+            
+        </div>
+    <% }); %>
+</section>
+    
 
    
 
 
 
     <section class="postar">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/enviarmsarte" method="post" enctype="multipart/form-data">
             <div>
                 <img src="" alt="">
-                <input class="usuario_divulgacao1" type="text" value="" name="usuario_divulgacao" autocomplete="off">
+                <input class="usuario_divulgacao" type="text"  name="usuario_divulgacao" autocomplete="off">
             </div>
             <div>
-                <input class="usuario_divulgacao2" type="text" value="" name="titulo_divulgacao" id="" placeholder="Divulge..." autocomplete="off">
+                <input class="usuario_divulgacao" type="text" value="" name="mensagem" id="" placeholder="Divulge..." autocomplete="off">
             </div>
             <div class="img_post">
                 <input class="img_divulgacao" type="file" name="img_divulgacao" autocomplete="off">

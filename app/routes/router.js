@@ -64,6 +64,9 @@ var usuarioDAL = new UsuarioDAL(conexao);
 var PostDAL = require("../models/PostDAL");
 var postDAL = new PostDAL(conexao);
 
+var ComunidadeDAL = require("../models/ComunidadeDAL");
+var comunidadeDAL = new ComunidadeDAL(conexao);
+
 
   const {validationResult } = require("express-validator");
 
@@ -210,9 +213,86 @@ router.get("/comunidades", function(req, res){
   res.render("pages/comunidades", {retorno: null, erros: null})}
 );
 
-router.get("/comunidades_artesvisuais", function(req, res){
-  res.render("pages/comunidades_artesvisuais", {retorno: null, erros: null})}
+
+router.get("/comunidades_artesvisuais", async function(req, res){
+  try {
+
+      let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+        
+      inicio = parseInt(pagina - 1) * 5
+      results = await comunidadeDAL.FindPage(inicio, 5);
+      totReg = await comunidadeDAL.TotalReg();
+      console.log(results)
+  
+      totPaginas = Math.ceil(totReg[0].total / 5);
+  
+      var paginador = totReg[0].total <= 5 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+  
+      console.log("auth --> ")
+      console.log(req.session.autenticado)
+      res.render("pages/comunidades_artesvisuais",{ mensagens: results, paginador: paginador, autenticado:req.session.autenticado, listaErros: null, dadosNotificacao: null} );
+    } catch (e) {
+      console.log(e); // console log the error so we can see it in the console
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  } );
+
+router.post(
+  "/enviarmsarte",
+  upload.single("img_divulgacao"),
+  verificarUsuAutenticado,
+  verificarUsuAutorizado([1, 2, 3], "/login"),
+  async function (req, res) {
+    var dadosMs = {
+      mensagem: req.body.mensagem,
+      id_usuario: req.session.autenticado.id,
+      usuario: req.session.autenticado.usuario,
+    };
+
+    if (req.file) {
+      caminhoArquivo = "img/posts/" + req.file.filename;
+      dadosMs.img_divulgacao = caminhoArquivo;
+    }
+
+    try {
+      let insert = await comunidadeDAL.create(dadosMs);
+      console.log(insert);
+      res.redirect("/comunidades_artesvisuais");
+    } catch (e) {
+      res.redirect("/comunidades_artesvisuais");
+    }
+  }
 );
+
+
+// router.post("/enviarmsarte", 
+// upload.single('img_divulgacao'),
+// verificarUsuAutenticado, 
+// verificarUsuAutorizado([1, 2, 3], "/login"),
+//  async function(req,res){
+//   var dadosMs = {
+//     mensagem: req.body.mensagem,
+//     img_divulgacao: req.body.img_divulgacao,
+//     id_usuario: req.session.autenticado.id,
+//     usuario: req.session.autenticado.usuario
+//   }
+//   console.log(dadosMs)
+//   if (!req.file) {
+//     console.log("Falha no carregamento");
+//   } else {
+//     caminhoArquivo = "img/posts/" + req.file.filename;
+//     dadosMs.img_divulgacao = caminhoArquivo
+//   }
+//   try {
+//     let insert = await comunidadeDAL.create(dadosMs);
+//     console.log(insert);
+//     res.redirect("/comunidades_artesvisuais")
+//   } catch (e) {
+//     res.redirect("/comunidades_artesvisuais")
+//   }
+
+// }
+// );
 
 router.get("/comunidades_musicas", function(req, res){
   res.render("pages/comunidades_musicas", {retorno: null, erros: null})}
@@ -529,5 +609,7 @@ router.post("/cadastrar",
     }
 
   });
+
+  
 
 module.exports = router;

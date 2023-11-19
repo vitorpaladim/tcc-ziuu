@@ -219,14 +219,14 @@ router.get("/comunidades_artesvisuais", async function(req, res){
 
       let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
         
-      inicio = parseInt(pagina - 1) * 5
-      results = await comunidadeDAL.FindPage(inicio, 5);
+      inicio = parseInt(pagina - 1) * 10
+      results = await comunidadeDAL.FindPage(inicio, 10);
       totReg = await comunidadeDAL.TotalReg();
       console.log(results)
   
-      totPaginas = Math.ceil(totReg[0].total / 5);
+      totPaginas = Math.ceil(totReg[0].total / 10);
   
-      var paginador = totReg[0].total <= 5 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
+      var paginador = totReg[0].total <= 10 ? null : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas }
   
       console.log("auth --> ")
       console.log(req.session.autenticado)

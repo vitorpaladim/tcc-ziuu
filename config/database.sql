@@ -29,6 +29,7 @@ CREATE TABLE comunidadeartes (
   usuario varchar(55),
   mensagem varchar(1000),
   img_divulgacao varchar (255)
+ 
 );
 
 

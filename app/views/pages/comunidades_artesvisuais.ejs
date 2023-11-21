@@ -59,13 +59,21 @@
         <h3>Artes visuais</h3>
 
     </div>  
-<section id="mensagens-geral">
+<section class="mensagens-geral" id="mensagens-geral">
     <% mensagens.forEach(function(msg){ %>
         <div id="mensagem">
-            <span><%=msg.usuario%></span>
-            <p><%=msg.mensagem%></p>
-            <img src="<%=msg.img_divulgacao%>" alt="">
-            
+            <span class="mensagens-usu"><%=autenticado.nome%></span>
+
+             <a href="">
+                <button class="editar">Editar</button>
+            </a>
+            <a href="">
+                <button class="editar">Deletar</button>
+            </a>
+            <p class="mensagens-men"><%=msg.mensagem%></p>
+            <img class="mensagens-img" src="<%=msg.img_divulgacao%>" alt="">
+
+           
         </div>
     <% }); %>
 </section>
@@ -82,10 +90,10 @@
                 <input class="usuario_divulgacao" type="text"  name="usuario_divulgacao" autocomplete="off">
             </div>
             <div>
-                <input class="usuario_divulgacao" type="text" value="" name="mensagem" id="" placeholder="Divulge..." autocomplete="off">
+                <input class="usuario_divulgacao2" type="text" value="" name="mensagem" id="" placeholder="Conecte-se..." autocomplete="off">
             </div>
             <div class="img_post">
-                <input class="img_divulgacao" type="file" name="img_divulgacao" autocomplete="off">
+                <input class="img_divulgacao" type="file" name="img_divulgacao"  autocomplete="off">
                 <button>Enviar</button>
             </div>
         </form>

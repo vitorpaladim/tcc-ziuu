@@ -161,7 +161,7 @@ nav {
 
 .left {
 
-    width: 250px;
+    width: 500px;
 }
 
 .perfil_divul{
@@ -180,7 +180,7 @@ nav {
     background-color: #20A195;
     color: #fff;
     padding: 1% 2%;
-    width: 30%;
+    width: 35%;
     font-size: 100%;
     font-weight: 700;
     cursor: pointer;
@@ -228,10 +228,10 @@ border-radius: 6px;
 background-color: #D9D9D9;
 }
 
-.img_post button{
+.postar button{
   border: none;
   border-radius: 7px;
- margin-left: 15%;
+ margin-left: 80%;
   margin-top: 2%;
   background-color: #20A195;
   color: #fff;
@@ -241,7 +241,7 @@ background-color: #D9D9D9;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
-
+  
 }
 
 .img_divulgacao{
@@ -256,6 +256,10 @@ background-color: #D9D9D9;
     height: 100px; 
     border-radius: 50%; 
     overflow: hidden; 
+}
+
+.postagem-geral{
+    padding: 0;
 }
 
 .postagem{
@@ -314,3 +318,32 @@ color: #000000;
    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
  }
  
+
+ .img_divulgacao {
+    display: none;
+}
+
+.icon1 {
+    color: #000000;
+    cursor: pointer;
+    font-size: 120%;
+}
+
+
+.icon2 {
+    color: #000000;
+    cursor: pointer;
+    font-size: 120%;
+}
+
+
+.postar span:hover{
+    color: #20A195;
+}
+
+
+
+.video_divulgacao {
+    display: none;
+}
+

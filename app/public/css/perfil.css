@@ -162,7 +162,7 @@ nav {
 
 .left {
 
-    width: 250px;
+    width: 500px;
 }
 
 .info{
@@ -321,10 +321,10 @@ border-radius: 6px;
 background-color: #D9D9D9;
 }
 
-.img_post button{
+.postar button{
   border: none;
   border-radius: 7px;
- margin-left: 15%;
+ margin-left: 80%;
   margin-top: 2%;
   background-color: #20A195;
   color: #fff;
@@ -340,6 +340,10 @@ background-color: #D9D9D9;
 .img_divulgacao{
     margin-top: 5%;
     font-family: 'Poppins', sans-serif;
+}
+
+.postagem-geral{
+    padding: 0;
 }
 
 .postagem{
@@ -374,6 +378,36 @@ background-color: #D9D9D9;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
    
 }
+
+.img_divulgacao {
+    display: none;
+}
+
+.icon1 {
+    color: #000000;
+    cursor: pointer;
+    font-size: 120%;
+}
+
+
+.icon2 {
+    color: #000000;
+    cursor: pointer;
+    font-size: 120%;
+}
+
+
+.postar span:hover{
+    color: #20A195;
+}
+
+
+
+.video_divulgacao {
+    display: none;
+}
+
+
 
 .right {
    margin-right: 7%;

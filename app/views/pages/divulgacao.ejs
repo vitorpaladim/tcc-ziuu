@@ -81,7 +81,7 @@
         <div class="left">
            
             <div class="perfil_divul">
-                <img src="/img/fotodeperfil3.png" alt=""  class=""> <!--foto-->
+                <img src="<%=autenticado.img_usuario%>" alt=""  class="fotodeperfil2"> <!--foto-->
              <h3><%= autenticado.autenticado %></h3> <!--Nome-->
              <h4 class="usuario"><%=autenticado.usuario%></h4><!--usuario-->
 
@@ -116,13 +116,22 @@
                         <input class="usuario_divulgacao" type="text" value="" name="titulo_divulgacao" id="" placeholder="Divulge..." autocomplete="off">
                     </div>
                     <div class="img_post">
-                        <input class="img_divulgacao" type="file" name="img_divulgacao" autocomplete="off">
-                        <button>Postar</button>
+                        <label for="img_divulgacao" class="icon-upload">
+                            <input class="img_divulgacao" type="file" name="img_divulgacao" id="img_divulgacao" autocomplete="off">
+                            <span class="icon1"><i class="uil uil-image"></i>Imagem</span>
+                        </label>
                     </div>
+                    <div class="video_post">
+                        <label for="video_divulgacao" class="icon-upload">
+                            <input class="video_divulgacao" type="file" name="video_divulgacao" id="video_divulgacao" autocomplete="off">
+                            <span class="icon2"><i class="uil uil-video"></i>Video</span>
+                        </label>
+                    </div>
+                     <button>Postar</button>
                 </form>
            </section>
 
-                <section>
+                <section class="postagem-geral">
                     <% post.forEach(function(divulgacao){ %>
                     <div class="postagem">
                         <div>   

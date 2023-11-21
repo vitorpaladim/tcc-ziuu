@@ -195,3 +195,9 @@ background-color: #D9D9D9;
 .comu_comunidades li:hover{
     color: #000000;
 }
+
+.meio i{
+    font-size: 2000%;
+    margin-left: 28%;
+    color: #b8b8b8;
+}

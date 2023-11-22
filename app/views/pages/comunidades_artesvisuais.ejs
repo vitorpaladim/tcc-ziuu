@@ -62,12 +62,12 @@
 <section class="mensagens-geral" id="mensagens-geral">
     <% mensagens.forEach(function(msg){ %>
         <div id="mensagem">
-            <span class="mensagens-usu"><%=autenticado.nome%></span>
+            <span class="mensagens-usu"><%=msg.usuario%></span>
 
-             <a href="">
+             <!-- <a href="">
                 <button class="editar">Editar</button>
-            </a>
-            <a href="">
+            </a> -->
+            <a href="/deletarmsg/<%=msg.id_comunidade%>">
                 <button class="editar">Deletar</button>
             </a>
             <p class="mensagens-men"><%=msg.mensagem%></p>

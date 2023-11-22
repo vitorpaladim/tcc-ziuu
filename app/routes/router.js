@@ -246,7 +246,7 @@ router.post(
     var dadosMs = {
       mensagem: req.body.mensagem,
       id_usuario: req.session.autenticado.id,
-      usuario: req.session.autenticado.usuario,
+      usuario: req.session.autenticado.nome,
     };
 
     if (req.file) {
@@ -264,6 +264,17 @@ router.post(
   }
 );
 
+
+router.get("/deletarmsg/:id", function (req, res) {
+  var query = db.query(
+    "DELETE FROM comunidadeartes WHERE ?",
+    { id_comunidade: req.params.id },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  );  
+  res.redirect("/comunidades_artesvisuais");
+});
 
 // router.post("/enviarmsarte", 
 // upload.single('img_divulgacao'),

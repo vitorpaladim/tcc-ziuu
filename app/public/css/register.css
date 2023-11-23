@@ -87,3 +87,8 @@ body{
 .signup label:hover{
   text-decoration: underline;
 }
+.erro{
+  color: #c40000;
+ 
+  
+}

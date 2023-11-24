@@ -424,6 +424,17 @@ router.get("/excluir/:id", function (req, res) {
 });
 
 
+router.get("/deletarconta", function (req, res) {
+  var query = db.query(
+    "DELETE FROM usuarios WHERE ?",
+    { id: req.session.autenticado.id },
+    function (error, results, fields) {
+      if (error) throw error;
+    }
+  );  
+  res.redirect("/sair");
+});
+
 
 // router.post("/cadastrar", 
 //     body("email")
